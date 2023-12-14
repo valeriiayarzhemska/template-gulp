@@ -6,7 +6,9 @@ html {
   font-size: 10px;
   scroll-behavior: smooth; // delete if you dont need it
 
-  @include onDesktopSmall {
+  // mixins for example
+
+  /* @include onDesktopSmall {
     font-size: 9px;
   }
 
@@ -16,7 +18,7 @@ html {
 
   @include onTablet {
     font-size: 10px;
-  }
+  } */
 }
 
 h1,

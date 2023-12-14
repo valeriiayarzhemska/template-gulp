@@ -30,13 +30,9 @@ const paths = {
     src: '*.html',
     dest: 'dist/',
   },
-  images: {
-    src: 'src/images/**/*.{png,jpg,jpeg,gif,svg}',
-    dest: 'dist/src/images/',
-  },
-  files: {
-    src: 'src/files/**/*.pdf',
-    dest: 'dist/src/files/',
+  assets: {
+    src: 'src/assets/**/*.{png,jpg,jpeg,gif,svg,pdf}',
+    dest: 'dist/src/assets/',
   },
 };
 
@@ -46,7 +42,7 @@ gulp.task('clean', async function () {
   return deletedPaths;
 });
 
-const gulpStyles = gulp.task('styles', function () {
+gulp.task('styles', function () {
   return gulp
     .src(paths.styles.src)
     .pipe(sass().on('error', sass.logError))
@@ -56,7 +52,7 @@ const gulpStyles = gulp.task('styles', function () {
     .pipe(gulp.dest(paths.styles.dest));
 });
 
-const gulpScripts = gulp.task('scripts', function () {
+gulp.task('scripts', function () {
   return gulp
     .src(paths.scripts.src, {
       sourcemaps: true,
@@ -89,25 +85,21 @@ gulp.task('serve', function () {
   gulp.watch(paths.html.src, gulp.series('html')).on('change', server.reload);
 });
 
-gulp.task('images', function () {
+gulp.task('assets', function () {
   return gulp
-    .src(paths.images.src)
+    .src(paths.assets.src)
     .pipe(imagemin())
-    .pipe(gulp.dest(paths.images.dest));
-});
-
-gulp.task('files', function () {
-  return gulp.src(paths.files.src).pipe(gulp.dest(paths.files.dest));
+    .pipe(gulp.dest(paths.assets.dest));
 });
 
 export const start = gulp.task(
   'default',
-  gulp.series('clean', gulp.parallel('styles', 'scripts', 'images'), 'serve'),
+  gulp.series('clean', gulp.parallel('styles', 'scripts', 'assets'), 'serve'),
 );
 
 export const build = gulp.task(
   'build',
-  gulp.series('clean', gulp.parallel('styles', 'scripts', 'images', 'files', 'html')),
+  gulp.series('clean', gulp.parallel('styles', 'scripts', 'assets', 'html')),
 );
 
 gulp.task('deploy', function () {
