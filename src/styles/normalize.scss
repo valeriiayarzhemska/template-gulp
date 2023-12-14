@@ -1,0 +1,45 @@
+@import './utils/mixins'; // delete if you dont need it
+@import './utils/vars'; // delete if you dont need it
+
+html {
+  font-family: sans-serif;  // add imported font family here, for example, 'Roboto' from google fonts
+  font-size: 10px;
+  scroll-behavior: smooth; // delete if you dont need it
+
+  @include onDesktopSmall {
+    font-size: 9px;
+  }
+
+  @include onDesktopMini {
+    font-size: 7px;
+  }
+
+  @include onTablet {
+    font-size: 10px;
+  }
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: sans-serif; // add imported font family here, for example, 'Roboto' from google fonts
+}
+
+h2 {
+}
+
+h3 {
+}
+
+h4 {
+}
+
+h5 {
+}
+
+h6 {
+}
+
+p {
+}
